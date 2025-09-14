@@ -15,7 +15,7 @@
     "verify": "ts-node scripts-ts/verify-contracts.ts"
   },
   "dependencies": {
-    "chalk": "^5.4.1",
+    "chalk": "4.1.2",
     "dotenv": "^16.3.1",
     "envfile": "^6.18.0",
     "prettier": "^2.8.8",
@@ -38,8 +38,8 @@
     "eslint": "^8.0.0"
   },
   "overrides": {
-    "chalk": "5.3.0",
-    "strip-ansi": "7.1.0",
+    "chalk": "4.1.2",
+    "strip-ansi": "6.0.1",
     "color-convert": "2.0.1",
     "color-name": "1.1.4",
     "is-core-module": "2.13.1",

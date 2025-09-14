@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import { red, green, blue, cyan, white, yellow } from "./colorize-log";
 import { Account, Contract, RpcProvider, shortString } from "starknet";
 
 const createHyperlink = (url: string, text?: string) => {
@@ -21,18 +21,18 @@ export const logDeploymentSummary = ({
   } else if (network === "mainnet") {
     baseUrl = `https://starkscan.co`;
   } else {
-    console.error(chalk.red(`Unsupported network: ${network}`));
+    console.error(red(`Unsupported network: ${network}`));
     return;
   }
 
-  console.log(chalk.green("\n📦 Deployment Summary\n"));
-  console.log(`${chalk.blue("🌐 Network:")} ${chalk.white(network)}\n`);
-  console.log(chalk.cyan("🔗 Transaction:"));
+  console.log(green("\n📦 Deployment Summary\n"));
+  console.log(`${blue("🌐 Network:")} ${white(network)}\n`);
+  console.log(cyan("🔗 Transaction:"));
   const txUrl = `${baseUrl}/tx/${transactionHash}`;
   console.log(createHyperlink(txUrl) + "\n");
 
   for (const [name, { address }] of Object.entries(deployments)) {
-    console.log(chalk.yellow(`📄 ${name} Contract:`));
+    console.log(yellow(`📄 ${name} Contract:`));
     const contractUrl = `${baseUrl}/contract/${address}`;
     console.log(createHyperlink(contractUrl) + "\n");
   }
@@ -52,12 +52,12 @@ export const postDeploymentBalanceSummary = async ({
     address: string;
   }[];
 }) => {
-  console.log(chalk.blue("💰 Deployer Balance Summary:"));
+  console.log(blue("💰 Deployer Balance Summary:"));
   console.log(`Deployer-Address: ${deployer.address}`);
 
   if (!feeToken || feeToken.length === 0) {
     console.log(
-      chalk.red(
+      red(
         "Error: No fee token information provided. Cannot fetch balance."
       )
     );
@@ -87,11 +87,7 @@ export const postDeploymentBalanceSummary = async ({
         decimals = Number(decimalsResult.toString());
       }
     } catch (e) {
-      console.warn(
-        chalk.yellow(
-          `Could not fetch decimals for ${tokenInfo.name}. Assuming 18 decimals.`
-        )
-      );
+      console.warn(yellow(`Could not fetch decimals for ${tokenInfo.name}. Assuming 18 decimals.`));
     }
 
     // Convert the raw BigInt balance to a human-readable format.
@@ -104,12 +100,9 @@ export const postDeploymentBalanceSummary = async ({
       }`
     );
   } catch (error) {
-    console.error(
-      chalk.red(`Error fetching deployer balance for ${tokenInfo.name}:`),
-      error
-    );
+    console.error(red(`Error fetching deployer balance for ${tokenInfo.name}:`), error);
     if (error instanceof Error) {
-      console.error(chalk.red("Error message:"), error.message);
+      console.error(red("Error message:"), error.message);
     }
   }
 };
