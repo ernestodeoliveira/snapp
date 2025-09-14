@@ -7,7 +7,244 @@ const deployedContracts = {
   devnet: {
     CounterContract: {
       address:
-        "0x4a365eb68881b295b2760de850bb1d8ebb3cc954fff5a186628410652ebcf6b",
+        "0x3afe697fce6cbbb489eab669e1a53790dc62dd75975254d3851d176ab777c75",
+      abi: [
+        {
+          type: "impl",
+          name: "CounterImpl",
+          interface_name: "contracts::counter::ICounter",
+        },
+        {
+          type: "interface",
+          name: "contracts::counter::ICounter",
+          items: [
+            {
+              type: "function",
+              name: "get_counter",
+              inputs: [],
+              outputs: [
+                {
+                  type: "core::integer::u32",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "increase_counter",
+              inputs: [],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "decrease_counter",
+              inputs: [],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "set_counter",
+              inputs: [
+                {
+                  name: "new_value",
+                  type: "core::integer::u32",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "reset_counter",
+              inputs: [],
+              outputs: [],
+              state_mutability: "external",
+            },
+          ],
+        },
+        {
+          type: "impl",
+          name: "OwnableImpl",
+          interface_name: "openzeppelin_access::ownable::interface::IOwnable",
+        },
+        {
+          type: "interface",
+          name: "openzeppelin_access::ownable::interface::IOwnable",
+          items: [
+            {
+              type: "function",
+              name: "owner",
+              inputs: [],
+              outputs: [
+                {
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "transfer_ownership",
+              inputs: [
+                {
+                  name: "new_owner",
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "renounce_ownership",
+              inputs: [],
+              outputs: [],
+              state_mutability: "external",
+            },
+          ],
+        },
+        {
+          type: "constructor",
+          name: "constructor",
+          inputs: [
+            {
+              name: "init_value",
+              type: "core::integer::u32",
+            },
+            {
+              name: "owner",
+              type: "core::starknet::contract_address::ContractAddress",
+            },
+          ],
+        },
+        {
+          type: "enum",
+          name: "contracts::counter::CounterContract::ChangeReason",
+          variants: [
+            {
+              name: "Increase",
+              type: "()",
+            },
+            {
+              name: "Decrease",
+              type: "()",
+            },
+            {
+              name: "Reset",
+              type: "()",
+            },
+            {
+              name: "Set",
+              type: "()",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "contracts::counter::CounterContract::CounterChanged",
+          kind: "struct",
+          members: [
+            {
+              name: "caller",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+            {
+              name: "old_counter",
+              type: "core::integer::u32",
+              kind: "data",
+            },
+            {
+              name: "new_counter",
+              type: "core::integer::u32",
+              kind: "data",
+            },
+            {
+              name: "reason",
+              type: "contracts::counter::CounterContract::ChangeReason",
+              kind: "data",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+          kind: "struct",
+          members: [
+            {
+              name: "previous_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+            {
+              name: "new_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+          kind: "struct",
+          members: [
+            {
+              name: "previous_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+            {
+              name: "new_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
+          kind: "enum",
+          variants: [
+            {
+              name: "OwnershipTransferred",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+              kind: "nested",
+            },
+            {
+              name: "OwnershipTransferStarted",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+              kind: "nested",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "contracts::counter::CounterContract::Event",
+          kind: "enum",
+          variants: [
+            {
+              name: "CounterChanged",
+              type: "contracts::counter::CounterContract::CounterChanged",
+              kind: "nested",
+            },
+            {
+              name: "OwnableEvent",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
+              kind: "flat",
+            },
+          ],
+        },
+      ],
+      classHash:
+        "0xdbd4eed9309ec30ff56e023e3c517a4a01d1e22af043f4bbe511f6006fe06b",
+    },
+  },
+  mainnet: {
+    CounterContract: {
+      address:
+        "0x60347d21cbd23051de7e11b69430580ac8215f43bbf654168b5ba6b2a5c8ea2",
       abi: [
         {
           type: "impl",
